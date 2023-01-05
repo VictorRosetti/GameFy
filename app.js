@@ -33,11 +33,12 @@ app.use(express.static("Front/"));
 })();*/
 
 app.post('/cadastro', (req,res)=>{
+    console.log("Dados recebidos no cadastro: "+req.body);
 	let nome = req.body.nome;
     let email = req.body.email;
     let senha = req.body.senha;
     let titulo = req.body.titulo;
-    let professor = req.body.professor;
+    //let professor = req.body.professor;
     let db = new sqlite3.Database(DBPATH);
     let verifica = `SELECT * FROM usuarios WHERE email=${email}`;
     let grava = `INSERT INTO usuarios VALUES ${nome},${email},${senha},${titulo},${professor}`;
@@ -70,7 +71,7 @@ app.post('/cadastro', (req,res)=>{
 
 });
 app.get('/login', (req, res) => {
-	//console.log(req.params);
+	console.log("Dados recebidos no login: "+req.body);
 	let login = req.body.login;
 	let senha = req.body.senha;
 	res.setHeader('Access-Control-Allow-Origin', '*');
@@ -101,6 +102,10 @@ app.get('/login', (req, res) => {
 
 app.get("/", function(req,res){
     return res.redirect('/cadastro');
+});
+
+app.get("/cadastro", function(req,res){
+    res.sendFile('cadastro.html', {root: "Front/"});
 });
 
 app.get("/user", async function(req,res){

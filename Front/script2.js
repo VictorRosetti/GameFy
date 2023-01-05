@@ -15,9 +15,25 @@ function online(){
     });
 }
 function SendData(){
-    $.post("https://ur524n-3000.preview.csb.app/cadastro",
+    var titulo = 0;
+    console.log("Dado do professor:"+$("#titulo").checked);
+    if($("#titulo").checked)
+    {
+        titulo = 1;
+    }
+    $.post("https://k569z2-3000.preview.csb.app/cadastro",
     {"nome" : $("#nome").val(),
     "email" : $("#email").val(),
+    "senha" : $("#senha").val(),
+    "titulo": titulo}
+    , function(msg){
+        $("#resposta").html(msg);
+    })
+}
+
+function Login(){
+    $.post("https://k569z2-3000.preview.csb.app/login",
+    {"email" : $("#email").val(),
     "senha" : $("#senha").val()}
     , function(msg){
         $("#resposta").html(msg);
