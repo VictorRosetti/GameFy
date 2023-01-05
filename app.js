@@ -1,17 +1,15 @@
 var express = require("express");
 var app = express();
-var bodyParser = require('body-parser')
+var bodyParser = require("body-parser");
 var port = process.env.PORT || 3000;
 //const db = require("./db");
-const sqlite3 = require('sqlite3').verbose();
-const DBPATH = 'gamefy.db';
+const sqlite3 = require("sqlite3").verbose();
+const DBPATH = "gamefy.db";
 const { json } = require("express/lib/response");
 
-
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static("Front/"));
-
+app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(express.static("Front/"));
 
 /*(async () => {
     const db = require("./db");
@@ -66,10 +64,12 @@ app.post('/cadastro', (req,res)=>{
                 }
             });
         }
-    });
-    db.close();
-
+      });
+    }
+  });
+  db.close();
 });
+
 app.get('/login', (req, res) => {
 	console.log("Dados recebidos no login: "+req.body);
 	let login = req.body.login;
@@ -98,11 +98,16 @@ app.get('/login', (req, res) => {
 		
 	});
 	db.close(); // Fecha o banco
+
 });
 
-app.get("/", function(req,res){
-    return res.redirect('/cadastro');
+app.get("/", function (req, res) {
+  return res.redirect("/cadastro");
 });
+app.get("/cadastro", function (req, res) {
+  res.sendFile("cadastro.html", { root: "Front/" });
+});
+
 
 app.get("/cadastro", function(req,res){
     res.sendFile('cadastro.html', {root: "Front/"});
@@ -113,31 +118,32 @@ app.get("/user", async function(req,res){
     res.header("Access-Control-Allow-Origin", "*");
     var resultado = await db.selectCustomers("Teo");
     res.send(resultado);
+
 });
 
-app.post("/add", function(req,res){
-    res.header("Access-Control-Allow-Origin", "*");
-    console.log(req);
-    console.log(req.body);
-    console.log("Recebi um dado");
-    console.log(req.body.nome);
-    console.log(req.body.sobrenome);
-    console.log(req.body.idade);
-    console.log(req.body.altura);
-    res.send("JSON Recebido!")
+app.post("/add", function (req, res) {
+  res.header("Access-Control-Allow-Origin", "*");
+  console.log(req);
+  console.log(req.body);
+  console.log("Recebi um dado");
+  console.log(req.body.nome);
+  console.log(req.body.sobrenome);
+  console.log(req.body.idade);
+  console.log(req.body.altura);
+  res.send("JSON Recebido!");
 });
 
-app.post("/addDB", function(req,res){
-    res.header("Access-Control-Allow-Origin", "*");
-    console.log(req.body);
-    console.log("Recebi um dado");
-    console.log(req.body.nome);
-    console.log(req.body.sobrenome);
-    console.log(req.body.idade);
-    console.log(req.body.altura);
-    res.send("JSON Recebido!")
+app.post("/addDB", function (req, res) {
+  res.header("Access-Control-Allow-Origin", "*");
+  console.log(req.body);
+  console.log("Recebi um dado");
+  console.log(req.body.nome);
+  console.log(req.body.sobrenome);
+  console.log(req.body.idade);
+  console.log(req.body.altura);
+  res.send("JSON Recebido!");
 });
 
 app.listen(port, () => {
-    console.log(`Server running at:${port}/`);
-  });
+  console.log(`Server running at:${port}/`);
+});
