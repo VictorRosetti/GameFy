@@ -15,12 +15,11 @@ function online(){
     });
 }
 function SendData(){
-    $.post("https://pure-gorge-84152.herokuapp.com/add",
-    {"nome" : $("#nomeI").val(),
-"sobrenome" : $("#sobrenomeI").val(),
-"idade" : $("#idadeI").val(),
-"altura" : $("#alturaI").val() }
+    $.post("https://ur524n-3000.preview.csb.app/cadastro",
+    {"nome" : $("#nome").val(),
+    "email" : $("#email").val(),
+    "senha" : $("#senha").val()}
     , function(msg){
-        $("#result").html(msg);
+        $("#resposta").html(msg);
     })
 }
