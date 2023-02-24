@@ -106,6 +106,7 @@
     "minimist": "^1.2.6",
     "ms": "^2.0.0",
     "negotiator": "^0.6.3",
+    "nodemon": "^2.0.20",
     "nopt": "^1.0.10",
     "normalize-path": "^3.0.0",
     "normalize-url": "^4.5.1",
@@ -182,7 +183,7 @@
     "yallist": "^4.0.0"
   },
   "scripts": {
-    "start": "node app"
+    "start": "nodemon app.js"
   },
   "keywords": [
     "nodejs",
